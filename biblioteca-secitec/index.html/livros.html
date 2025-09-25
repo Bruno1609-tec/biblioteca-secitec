@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista de Livros</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 20px; }
+    table { width: 100%; border-collapse: collapse; background: #fff; }
+    th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+    h1 { color: #333; }
+    .nav { margin-top: 15px; }
+  </style>
+</head>
+<body>
+  <h1>Livros Cadastrados</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Autor</th>
+        <th>Ano</th>
+      </tr>
+    </thead>
+    <tbody id="listaLivros"></tbody>
+  </table>
+
+  <div class="nav">
+    <button onclick="window.location.href='cadastro.html'">Cadastrar novo livro</button>
+  </div>
+
+  <script>
+    const lista = document.getElementById("listaLivros");
+    const livros = JSON.parse(localStorage.getItem("livros")) || [];
+
+    if (livros.length === 0) {
+      lista.innerHTML = "<tr><td colspan='3'>Nenhum livro cadastrado</td></tr>";
+    } else {
+      livros.forEach(livro => {
+        lista.innerHTML += `
+          <tr>
+            <td>${livro.titulo}</td>
+            <td>${livro.autor}</td>
+            <td>${livro.ano}</td>
+          </tr>
+        `;
+      });
+    }
+  </script>
+</body>
+</html>
